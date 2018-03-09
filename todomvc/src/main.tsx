@@ -6,8 +6,7 @@ import TodoListFooterView from './TodoList/TodoListFooterView';
 import TodoListInputView from './TodoList/TodoListInputView';
 import TodoListSwitchButtonView from './TodoList/TodoListSwitchButtonView';
 
-const todoList = new TodoListModel([]);
-todoList.addTodo("Don't use Redux")
+const todoList = new TodoListModel(["Don't use Redux"]);
 
 ReactDOM.render(
     <div>
