@@ -1,0 +1,39 @@
+{
+  "name": "react-without-redux-todomvc",
+  "version": "0.0.1",
+  "description": "Your frontend doesn't need Redux in Todo MVC",
+  "scripts": {
+    "clean": "rimraf dist/* && mkdir dist/css",
+    "build:ts": "browserify ./src/main.tsx -p [ tsify ] -o ./dist/js/app.js",
+    "watch:ts": "onchange './src/**/*.ts' './src/**/*.tsx' -- npm run build:ts",
+    "copy:css": "cp ./node_modules/todomvc-app-css/index.css ./dist/css/main.css",
+    "copy:html": "cp ./src/main.html ./dist/main.html",
+    "watch:html": "onchange './src/main.html' -- npm run copy:html",
+    "build": "npm run clean && npm run copy:html && npm run copy:css && npm run build:ts",
+    "prewatch": "npm run build",
+    "watch": "parallelshell 'npm run watch:html' 'npm run watch:ts'",
+    "serve": "live-server --port=9090 --no-browser --entry-file=main.html ./dist",
+    "pretest": "tsc --outDir ./test/build",
+    "test": "ava test/*.test.js"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4",
+    "ava": "^1.0.0-beta.3",
+    "browserify": "^16.1.0",
+    "live-server": "^1.2.0",
+    "onchange": "^3.3.0",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^2.6.2",
+    "stylus": "^0.54.5",
+    "tsc": "^1.20150623.0",
+    "tsify": "^3.0.4",
+    "typescript": "^2.7.2",
+    "uglify-js": "^3.3.11"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "todomvc-app-css": "^2.1.0"
+  }
+}
