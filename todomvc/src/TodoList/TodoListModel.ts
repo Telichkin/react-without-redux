@@ -5,20 +5,25 @@ export default class extends BaseModel {
     private allItems: TodoItemModel[] = [];
     private mode: string = "all";
 
-    constructor(items: TodoItemModel[]) {
+    constructor(items: string[]) {
         super();
-        this.allItems = items;
+        items.forEach((text: string) => this.addTodo(text));
+    }
+
+    addTodo(text: string) {
+        this.allItems.push(new TodoItemModel(this.allItems.length, text, this));
+        this.updateViews();
+    }
+
+    removeCompleted() {
+        this.allItems = this.onlyActiveItems;
+        this.updateViews();
     }
 
     get shownItems() {
         if (this.mode === "active") { return this.onlyActiveItems; }
         if (this.mode === "completed") { return this.onlyCompletedItems; }
         return this.allItems; 
-    }
-
-    removeCompleted() {
-        this.allItems = this.onlyActiveItems;
-        this.updateViews();
     }
 
     get onlyActiveItems() {
@@ -29,12 +34,7 @@ export default class extends BaseModel {
         return this.allItems.filter((item: TodoItemModel) => item.isCompleted());
     }
 
-    addTodo(text: string) {
-        this.allItems.push(new TodoItemModel(this.allItems.length, text, this));
-        this.updateViews();
-    }
-
-    markAllAsCompleted() {
+    toggleAll() {
         const itemsToSwitch = this.onlyActiveItems.length === 0 ? this.allItems : this.onlyActiveItems;
         itemsToSwitch.forEach((item: TodoItemModel) => item.switchStatus())
         this.updateViews();

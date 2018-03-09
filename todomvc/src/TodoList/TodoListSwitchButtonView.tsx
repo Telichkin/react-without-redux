@@ -9,8 +9,9 @@ export default class extends BaseView<TodoListModel, {}> {
                 type="checkbox"
                 value="on"
                 className="toggle-all"
+                checked={this.model.onlyActiveItems.length === 0}
             />
-            <label onClick={() => this.model.markAllAsCompleted()}/>
+            <label onClick={() => this.model.toggleAll()}/>
         </span>
     ); }
 }
