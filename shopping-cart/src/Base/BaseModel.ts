@@ -5,7 +5,7 @@ export default class {
 
     subscribe(view: React.Component) {
         this.views.push(view);
-        view.setState({});
+        view.forceUpdate();
     }
 
     unsubscribe(view: React.Component) {
@@ -14,6 +14,6 @@ export default class {
     }
 
     protected updateViews() {
-        this.views.forEach((view: React.Component) => view.setState({}))
+        this.views.forEach((view: React.Component) => view.forceUpdate());
     }
 }
