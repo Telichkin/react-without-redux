@@ -23,6 +23,7 @@ export default class extends BaseModel {
 
     edit(newText: string) {
         if (!this.isInEditableMode()) { return; }
+        if (newText === "") { this.remove(); return; }
         this.text = newText;
         this.turnOffEditableMode();
     } 

@@ -9,8 +9,7 @@ export default class {
     }
 
     unsubscribe(view: React.Component) {
-        const index = this.views.indexOf(view);
-        if (index !== -1) { this.views.splice(index, 1); }
+        this.views = this.views.filter((item: React.Component) => item !== view);
     }
 
     protected updateViews() {

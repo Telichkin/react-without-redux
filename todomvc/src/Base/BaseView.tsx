@@ -1,5 +1,5 @@
-import * as React from 'react';
-import BaseModel from './BaseModel';
+import * as React from "react";
+import BaseModel from "./BaseModel";
 
 export default class<Model extends BaseModel, Props> extends React.Component<Props & {model: Model}, {}> {
     protected model: Model;
